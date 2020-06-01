@@ -48,14 +48,14 @@
   width: 90%;
   margin-top: 4rem;
 }
-.badge-decoration {
+.badge--decoration {
   width: 20rem;
   height: 3.5rem;
   border: 1px solid #e28c09;
   color: white;
   background: #d8a860;
   position: absolute;
-  right: -5rem;
+  right: 0;
   top: 5rem;
   transform: rotateZ(45deg);
   display: flex;

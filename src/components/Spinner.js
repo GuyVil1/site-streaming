@@ -10,7 +10,7 @@ const Spinner = props => {
             <FontAwesomeIcon
                 icon='spinner'
                 pulse
-                size='7x'
+                size='5x'
                 className='fa-faSpinner'
             />
         )

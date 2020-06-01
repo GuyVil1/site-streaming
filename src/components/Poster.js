@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router-dom'; //equivalent de la balise html <a>
 
 import '../css/Poster.css';
 
@@ -35,7 +36,9 @@ class Poster extends Component {
                 onMouseLeave={this.hideOverlay}
                 className='poster'
             >
-                <img className="poster--img" src={this.props.imgSrc} alt="cover" />
+                <Link to={ {pathname:`/${this.props.id}`}}>
+                    <img className="poster--img" src={this.props.imgSrc} alt="cover" />
+                </Link>
                 {this.state.hover ?//Si je passe la souris sur l'élément, affiche
                     (
                         <div className="poster--overlay">

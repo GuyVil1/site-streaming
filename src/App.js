@@ -79,7 +79,6 @@ class App extends Component{
       }, async () => {
         // Je selectionne les données utiles du json obtenu
         const { data : { results, page, total_pages } } = await this.searchMovies();
-        console.log('res', results);
         //Je redistribue les données dans mon state
         this.setState({
           movies: results,
@@ -135,17 +134,17 @@ class App extends Component{
           ) : (
             // Le switch va me permettre d'afficher à la volée différente route (page)
             <Switch>
-            <Route path="/" exact render={() => (
-                <Home
-                  {...this.state}
-                  onSearchClick={this.handleSearch}
-                  onButtonClick={this.loadMore} 
-                />
-              )} 
-            />
-            <Route path=':id' component={Details} /> 
-             {/*enfin la route pour affiche la page 404  */}
-            <Route component={NotFound} />
+              <Route path="/" exact render={() => (
+                  <Home
+                    {...this.state}
+                    onSearchClick={this.handleSearch}
+                    onButtonClick={this.loadMore} 
+                  />
+                )} 
+              />
+              <Route path="/:id" exact component={Details} /> 
+              {/*enfin la route pour affiche la page 404  */}
+              <Route exact component={NotFound} />
           </Switch>
           )}
 
