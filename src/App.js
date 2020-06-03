@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';//Module yarn add react-router-dom
-
+import { Provider} from 'react-redux';
 
 import { Header, Spinner } from './components';
-import { Home, Details, NotFound } from './routes';
+import { Home, Details, NotFound, MoviePlayer } from './routes';
 import { API_URL, API_KEY, IMAGE_BASE_URL, BACKDROP_SIZE } from './config';
+import store from './store';
 
 import './App.css';
 import '../src/css/Header.css';
@@ -123,33 +124,38 @@ class App extends Component{
 
   render(){
     return (
-      //BrowserRouter est toujours le premier élément que l'on retourne quand on utilise react-router-dom
-      //BrowserRouter n'aura qu'un seul élement enfant (ici notre div.App)
-      <BrowserRouter>
-        <div className="App">
-          <Header badge={this.state.badge} />
-          {/* Je vérifie si j'ai déjà une image stockée dans mon state, si pas, je lance la roue de chargement */}
-          {!this.state.image ? (
-            <Spinner />
-          ) : (
-            // Le switch va me permettre d'afficher à la volée différente route (page)
-            <Switch>
-              <Route path="/" exact render={() => (
-                  <Home
-                    {...this.state}
-                    onSearchClick={this.handleSearch}
-                    onButtonClick={this.loadMore} 
-                  />
-                )} 
-              />
-              <Route path="/:id" exact component={Details} /> 
-              {/*enfin la route pour affiche la page 404  */}
-              <Route exact component={NotFound} />
-          </Switch>
-          )}
+      
+      <Provider store={store}>
+        {/* //BrowserRouter est toujours le premier élément que l'on retourne quand on utilise react-router-dom
+        //BrowserRouter n'aura qu'un seul élement enfant (ici notre div.App) */}
+        <BrowserRouter>
+          <div className="App">
+            <Header badge={this.state.badge} />
+            {/* Je vérifie si j'ai déjà une image stockée dans mon state, si pas, je lance la roue de chargement */}
+            {!this.state.image ? (
+              <Spinner />
+            ) : (
+              // Le switch va me permettre d'afficher à la volée différente route (page)
+              <Switch>
+                <Route path="/" exact render={() => (
+                    <Home
+                      {...this.state}
+                      onSearchClick={this.handleSearch}
+                      onButtonClick={this.loadMore} 
+                    />
+                  )} 
+                />
+                <Route path="/:id" exact component={Details} /> 
+                {/*enfin la route pour affiche la page 404  */}
+                <Route path="player" exact component={MoviePlayer} />
+                <Route path="player/id" exact component={MoviePlayer} />
+                <Route exact component={NotFound} />
+            </Switch>
+            )}
 
-        </div>
-      </BrowserRouter>
+          </div>
+        </BrowserRouter>
+      </Provider>
     ); 
   }
 }

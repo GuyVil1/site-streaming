@@ -13,6 +13,13 @@ class PosterList extends Component{
             // const imgSrc = movie.poster_path;//avant redistribution vers api
             const imgSrc = `${IMAGE_BASE_URL}/${POSTER_SIZE}/${movie.poster_path}`;
             wish = false;
+            if(this.props.localMovies){
+                this.props.localMovies.forEach(localMovies => {
+                    if(movie.id === localMovies.id){
+                        wish = true
+                    }
+                })
+            }
             return(
                 <Poster //Pour chaque film trouvé j'affiche
                     key={movie.id}

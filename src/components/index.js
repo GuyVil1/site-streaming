@@ -10,3 +10,6 @@ export * from './Stars';
 export * from './Actor';
 export * from './ActorList';
 export * from './HeaderDetails';
+export * from './VideoPlayer';
+export * from './MvPlayerList';
+export * from './MvPlayerListItem';
